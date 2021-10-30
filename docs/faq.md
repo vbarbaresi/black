@@ -77,7 +77,7 @@ disabled-by-default counterpart W504. E203 should be disabled while changes are 
 ```{warning}
 Python 2 support has been deprecated since 21.10b0.
 
-this support will be dropped in the first stable release, expected for January 2022.
+This support will be dropped in the first stable release, expected for January 2022.
 See [The Black Code Style](the_black_code_style/index.rst) for details.
 ```
 
