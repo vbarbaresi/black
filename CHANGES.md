@@ -9,11 +9,18 @@
 - Fixed feature detection for positional-only arguments in lambdas (#2532)
 - Bumped typed-ast version minimum to 1.4.3 for 3.10 compatiblity (#2519)
 - Deprecate Python 2 formatting support (#2523)
+- Fixed a Python 3.10 compatibility issue where the loop argument was still being passed
+  even though it has been removed (#2580)
 
 ### _Blackd_
 
 - Remove dependency on aiohttp-cors (#2500)
 - Bump required aiohttp version to 3.7.4 (#2509)
+
+### _Black-Primer_
+
+- Add primer support for --projects (#2555)
+- Print primer summary after individual failures (#2570)
 
 ### Integrations
 

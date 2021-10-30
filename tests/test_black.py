@@ -50,6 +50,7 @@ from tests.util import (
     DATA_DIR,
     DEFAULT_MODE,
     DETERMINISTIC_HEADER,
+    PROJECT_ROOT,
     PY36_VERSIONS,
     THIS_DIR,
     BlackBaseTestCase,
@@ -1512,9 +1513,11 @@ class BlackTestCase(BlackBaseTestCase):
         """
         with patch.object(black, "parse_pyproject_toml", return_value={}) as parse:
             args = ["--code", "print"]
-            CliRunner().invoke(black.main, args)
+            # This is the only directory known to contain a pyproject.toml
+            with change_directory(PROJECT_ROOT):
+                CliRunner().invoke(black.main, args)
+                pyproject_path = Path(Path.cwd(), "pyproject.toml").resolve()
 
-            pyproject_path = Path(Path().cwd(), "pyproject.toml").resolve()
             assert (
                 len(parse.mock_calls) >= 1
             ), "Expected config parse to be called with the current directory."
@@ -1529,7 +1532,7 @@ class BlackTestCase(BlackBaseTestCase):
         Test that the code option finds the pyproject.toml in the parent directory.
         """
         with patch.object(black, "parse_pyproject_toml", return_value={}) as parse:
-            with change_directory(Path("tests")):
+            with change_directory(THIS_DIR):
                 args = ["--code", "print"]
                 CliRunner().invoke(black.main, args)
 
@@ -2033,7 +2036,9 @@ with open(black.__file__, "r", encoding="utf-8") as _bf:
     black_source_lines = _bf.readlines()
 
 
-def tracefunc(frame: types.FrameType, event: str, arg: Any) -> Callable:
+def tracefunc(
+    frame: types.FrameType, event: str, arg: Any
+) -> Callable[[types.FrameType, str, Any], Any]:
     """Show function calls `from black/__init__.py` as they happen.
 
     Register this with `sys.settrace()` in a test you're debugging.
