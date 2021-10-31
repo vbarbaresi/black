@@ -4,9 +4,9 @@ FROM python:3-slim
 RUN mkdir /src
 COPY . /src/
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
-    && apt update && apt install -y git \
+    # Install build tools to compile dependencies that don't have prebuilt wheels
+    && apt update && apt install -y git build-esssential \
     && cd /src \
-    && pip install --no-cache-dir regex==2021.10.8 \
     && pip install --no-cache-dir .[colorama,d] \
     && rm -rf /src \
     && apt remove -y git \
