@@ -45,7 +45,7 @@ from blib2to3.pgen2.grammar import Grammar
 __author__ = "Ka-Ping Yee <ping@lfw.org>"
 __credits__ = "GvR, ESR, Tim Peters, Thomas Wouters, Fred Drake, Skip Montanaro"
 
-import regex as re
+import re
 from codecs import BOM_UTF8, lookup
 from blib2to3.pgen2.token import *
 

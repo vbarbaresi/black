@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from functools import lru_cache
-import regex as re
+import re
 from typing import Iterator, List, Optional, Union
 
 from blib2to3.pytree import Node, Leaf
